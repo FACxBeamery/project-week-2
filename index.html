@@ -21,30 +21,32 @@
     </header>
 
     <main class="main">
-        <section class="section">
+        <section class="section" id="section-1">
             <h3 class="section__header">
                 Search Pokémon By ID
             </h3>
             <form class="form">
                 <label class="form__label" for="pokemon-id">Pokémon ID</label>
                 <input class="form__input" type="number" name="pokemon-id" id="pokemon-id">
+                <button id="form-1-button" class="form__button" type="submit">find my poke</button>
             </form>
         </section>
-        <section class="section">
+        <section class="section" id="section-2">
             <h3 class="section__header">
                 Get random Pokémon by their main type
             </h3>
             <form class="form">
-                <label class="form__label" for="pokemon-type">Random Pokemon By Type</label>
-                <select class="form__select" id="types-selector">
-                    
-                </select>
+                <input list="types-selector" name="types">
+                <datalist id="types-selector">
+                </datalist>
+                <input type="submit">
             </form>
         </section>
-        <section class="section">
+        <section class="section" id="section-3">
             <h3 class="section__header">
                 Get random Pokémon by their Region
             </h3>
+
             <form class="form">
                 <label class="form__label" for="pokemon-region">Random Pokemon From Region X</label>
                 <select class="form__select" id="regions-selector">
