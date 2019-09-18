@@ -1,0 +1,52 @@
+html {
+    font-family: 'Source Code Pro', monospace;
+    letter-spacing: 0.03rem;
+}
+
+.nav {
+    width: 100vw;
+    height: 20vh;
+}
+
+.header {
+    width: 100vw;
+    height: 80vh;
+}
+
+.header__title {
+
+}
+
+.header__subtitle {
+
+}
+
+.main {
+
+}
+
+.section {
+    background: blue;
+    width: 100vw;
+    height: 100vh;
+}
+
+.section__header {
+
+}
+
+.form {
+
+}
+
+.form__input {
+
+}
+
+.form__label {
+
+}
+
+.form__select {
+
+}
