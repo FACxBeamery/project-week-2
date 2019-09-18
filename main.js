@@ -1,8 +1,12 @@
 
 // pokeapi 
+var allPokemons = [];
+
 
 (() => { function fn()  {
     // "On document ready" commands:
+    getAllPokemons(1);
+    
     const types = [];
     const typeSelector = document.querySelector('#types-selector');
     const typesXHR = new XMLHttpRequest();  
@@ -48,6 +52,8 @@
     };
     typesXHR.open("GET", typesUrl, true);
     typesXHR.send();
+
+
 
   };  
   if (document.readyState != 'loading') {fn()}
@@ -133,6 +139,58 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
   pokemonXHR.send();
 });
 
+document.getElementById('form-2-button').addEventListener('click', (event) => {
+  event.preventDefault();
+  // const section1 = document.getElementById('section-1');
+  // const pokemonId = document.getElementById('pokemon-id').value;
+  // console.log(pokemonId);
+  // let pokemonId = ;
+  // const pokemonFound = requestPokemonByType(event.target.value);
+  const input = document.getElementById('type').value;
+  console.log(input);
+  
+
+  const hasType = allPokemons.filter((pokemon) => pokemon.types[0].type.name == input);
+  
+  console.log('okkkk', hasType[getRandomInt(hasType.length)]);
+
+    
+  // }
+  // console.log('YAY: ', pokemonFound);
+  
+  // console.log('found it! ')
+  console.log(allPokemons);
+  
+});
+
+const requestPokemonByType = (typeToCheck) => {
+  const pokemonXHR = new XMLHttpRequest();
+  const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${getRandomInt(807)}/`;
+  pokemonXHR.onreadystatechange = () => {
+    if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
+      console.log(JSON.parse(pokemonXHR.response)); 
+      const response = JSON.parse(pokemonXHR.response);
+      const types = response.types;
+      if (types.length > 1) {
+        if (types[1].type.name == typeToCheck) {
+          console.log('here');
+          
+          return response.name;
+        }
+      } else if (types.length == 1) {
+        if (types[0].type.name == typeToCheck) {
+          return response.name;
+        }
+      } else {
+        requestPokemonByType(typeToCheck);
+      }
+    }
+      
+  }
+  pokemonXHR.open("GET", pokemonUrl, true);
+  pokemonXHR.send();
+};
+
 
 
 // on load, add types and 
@@ -152,3 +210,52 @@ const addImage = ((url) => {
   img.src = url;
   return img;
 });
+
+const getRandomInt = ((max) => Math.floor(Math.random() * Math.floor(max)));
+
+const getAllPokemons = ((counter) => {
+  const pokemonXHR = new XMLHttpRequest();
+  const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${counter}/`;
+  pokemonXHR.onreadystatechange = () => {
+    if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
+      // console.log(JSON.parse(pokemonXHR.response)); 
+      allPokemons.push(JSON.parse(pokemonXHR.response));
+      counter += 1;
+      if (counter == 200) {
+        console.log('done');
+        return;
+        // return allPokemons;
+      } else {
+        getAllPokemons(counter);
+      }
+    }
+  }
+  pokemonXHR.open("GET", pokemonUrl, true);
+  pokemonXHR.send();
+});
+
+
+// finish cards
+
+// finish random pokemon
+
+// add warnings - look at project week 1
+
+// add form input red - look at porject week 1
+
+
+// add navigation
+
+
+// do unit testing for: 
+
+// make sure that: 
+/**
+ * first input is filled out
+ * result is less than 806
+ * first input is less than 403 and its an even number 
+ */
+// unit testing for multiplication lmao 
+
+ // styling to pokemon card: smaller 
+
