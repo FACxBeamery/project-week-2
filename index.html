@@ -21,6 +21,16 @@
     </header>
 
     <main class="main">
+        <section class="section">
+            <h3>Challenge of the day</h3>
+            <form>
+                <input type="text">
+                X
+                <input type="text">
+                = 
+                <input type="text">
+            </form>
+        </section>
         <section class="section" id="section-1">
             <h3 class="section__header">
                 Search Pokémon By ID
@@ -36,10 +46,10 @@
                 Get random Pokémon by their main type
             </h3>
             <form class="form">
-                <input list="types-selector" name="types">
+                <input list="types-selector" name="types" id="type">
                 <datalist id="types-selector">
                 </datalist>
-                <input type="submit">
+                <button id="form-2-button" type="submit">Find</button>
             </form>
         </section>
         <section class="section" id="section-3">
