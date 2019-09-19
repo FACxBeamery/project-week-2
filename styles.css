@@ -160,8 +160,8 @@ html, body {
 .pokemon-card {
     padding: 0.5rem;
     background: white;
-    width: 40vw;
-    margin-right: 0.8rem;
+    width: 70vw;
+    /* margin-right: 0.8rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -169,6 +169,11 @@ html, body {
     border: 2px solid #beacf1;
     padding: 1rem;
     box-shadow: 9px 8px 0px 0px #beacf1;
+}
+
+.pokemon-card--small {
+    width: 40vw;
+    margin-right: 1rem;
 }
 
 .pokemon-card__name {
@@ -215,9 +220,10 @@ html, body {
     }
     .pokemon-card {
         font-size: 0.5rem;
-        width: 30vw;
-        margin-right: 1rem;
+        /* width: 40vw; */
+        
     }
+   
     .form {
         width: 60vw;
     }
@@ -227,5 +233,12 @@ html, body {
     .form--row {
         font-size: 0.5rem;
     }
+    .form__input-list {
+        width: 50vw;
+        font-size: 0.8rem;
+    }
 
+    .form__input--large {
+        width: 35vw;    
+    }
 }
