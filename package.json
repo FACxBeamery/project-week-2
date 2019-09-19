@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "By Antonio and Joao.",
   "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "node test.js | tap-spec",
     "coverage": "nyc npm run test"
@@ -19,6 +22,7 @@
   "homepage": "https://github.com/FACxBeamery/project-week-2#readme",
   "dependencies": {
     "nyc": "^14.1.1",
+    "tap-spec": "^5.0.0",
     "tape": "^4.11.0"
   }
 }
