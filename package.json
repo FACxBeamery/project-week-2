@@ -1,0 +1,24 @@
+{
+  "name": "project-week-2",
+  "version": "1.0.0",
+  "description": "By Antonio and Joao.",
+  "main": "main.js",
+  "scripts": {
+    "test": "node test.js | tap-spec",
+    "coverage": "nyc npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACxBeamery/project-week-2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACxBeamery/project-week-2/issues"
+  },
+  "homepage": "https://github.com/FACxBeamery/project-week-2#readme",
+  "dependencies": {
+    "nyc": "^14.1.1",
+    "tape": "^4.11.0"
+  }
+}
