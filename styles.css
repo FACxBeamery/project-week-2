@@ -208,6 +208,7 @@ html, body {
     }
     .nav__link {
         margin-bottom: 0.5rem;
+        text-align: center;
     }
     .section__header {
         font-size: 2rem;
@@ -217,4 +218,14 @@ html, body {
         width: 30vw;
         margin-right: 1rem;
     }
+    .form {
+        width: 60vw;
+    }
+    .form__input-list {
+        width: 48vw;
+    }
+    .form--row {
+        font-size: 0.5rem;
+    }
+
 }
