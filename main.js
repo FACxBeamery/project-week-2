@@ -105,7 +105,7 @@ const addPokemonCard = ((pokemon) => {
   const pokemonTypesWrapper = document.createElement("DIV");
   const pokemonMovesWrapper = document.createElement("DIV");
   pokemonCard.classList.add('pokemon-card');
-  const pokemonName = addParagraph(capFirstLetAndRemoveHyphen(pokemon.name));
+  const pokemonName = addParagraph(capFirstLetAndRemoveHyphen(`#${pokemon.id} ${pokemon.name}`));
   pokemonName.classList.add('pokemon-card__name');
   pokemonCard.appendChild(pokemonName);
 
