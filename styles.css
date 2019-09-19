@@ -218,6 +218,12 @@ html, body {
     margin: 0;
 }
 
+.footer {
+    text-align: end;
+    margin-right: 1.5rem;
+    font-size: 0.5rem;
+}
+
 @media only screen and (max-width: 600px) {
     .nav {
         font-size: 0.8rem;
