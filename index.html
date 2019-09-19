@@ -9,26 +9,32 @@
 </head>
 <body>
     <nav class="nav">
-        <p>nav here</p>
+        <a class="nav__link" href="#section-challenge">🥶Challenge of the day</a>
+        <a class="nav__link" href="#section-1">🔬Pokémon by ID</a>
+        <a class="nav__link" href="#section-2">🧬Pokémon by Type</a>
     </nav>
     <header class="header">
+        <img class="header__image" src="https://icon-library.net/images/small-pokeball-icon/small-pokeball-icon-11.jpg" alt="">
         <h1 class="header__title">
-            Find your Pokémon!!
+            find your pokémon
         </h1>
         <h2 class="header__subtitle">
-            Hope you love Pokémon as much as I do
+            learn about my obsession.
         </h2>
     </header>
 
     <main class="main">
-        <section class="section">
-            <h3>Challenge of the day</h3>
-            <form>
-                <input type="text">
-                X
-                <input type="text">
-                = 
-                <input type="text">
+        <section class="section" id="section-challenge">
+            <h3 class="section__header">Challenge of the day</h3>
+            <form class="form">
+                <div class="form--row">
+                    <input class="form__input" type="number" name="first-operand" id="first-operand">
+                    <span class="form__helper">X</span>
+                    <input class="form__input" type="number" name="second-operand" id="second-operand">
+                    <span class="form__helper">=</span>
+                    <span class="form__helper">802</span>
+                </div>
+                <button type="sumbit" id="challenge-button" class="form__button">Test</button>
             </form>
         </section>
         <section class="section" id="section-1">
@@ -46,39 +52,12 @@
                 Get random Pokémon by their main type
             </h3>
             <form class="form">
-                <input list="types-selector" name="types" id="type">
+                <input class="form__input-list" list="types-selector" name="types" id="type">
                 <datalist id="types-selector">
                 </datalist>
-                <button id="form-2-button" type="submit">Find</button>
+                <button class="form__button" id="form-2-button" type="submit">Find</button>
             </form>
         </section>
-        <section class="section" id="section-3">
-            <h3 class="section__header">
-                Get random Pokémon by their Region
-            </h3>
-
-            <form class="form">
-                <label class="form__label" for="pokemon-region">Random Pokemon From Region X</label>
-                <select class="form__select" id="regions-selector">
-    
-                </select>
-            </form>
-        </section>
-        <!-- <section> -->
-
-            <!-- ID -->
-            <!-- https://pokeapi.co/api/v2/pokemon/id/ -->
-            <!-- Type -->
-            <!-- https://pokeapi.co/api/v2/type/8/ -->
-            <!-- Random Pokemon From Generation X -->
-            <!-- https://pokeapi.co/api/v2/pokedex/kanto/ -->
-            <!-- <form>
-                
-                
-                <input type="text" name="pokemon-type" id="pokemon-type">
-                
-            </form> -->
-        <!-- </section> -->
     </main>
     
     <footer>
