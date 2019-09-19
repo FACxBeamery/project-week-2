@@ -1,69 +1,66 @@
-
-// pokeapi 
 var allPokemons = [];
 
-
 (() => { function fn()  {
-    // "On document ready" commands:
     getAllPokemons(1);
     
     const types = [];
     const typeSelector = document.querySelector('#types-selector');
     const typesXHR = new XMLHttpRequest();  
     const typesUrl = 'https://pokeapi.co/api/v2/type/';
+    const header = document.querySelector('#header');
     typesXHR.onreadystatechange = () => {
         if (typesXHR.readyState === 4 && typesXHR.status === 200) {
           JSON.parse(typesXHR.response).results.map(result => types.push(result.name));
           types.forEach((type) => {
-            const newOption = document.createElement("OPTION");
-            newOption.setAttribute("value", type);
-            const newText = document.createTextNode(type);
-            newOption.appendChild(newText);
-            typeSelector.appendChild(newOption);
-            
-          });  
-          // autocomplete(document.getElementById("myInput"), types);
-
-          const regions = [];
-          const regionSelector = document.querySelector('#regions-selector');
-          const regionsXHR = new XMLHttpRequest();
-          const regionsUrl = 'https://pokeapi.co/api/v2/pokedex/';
-          regionsXHR.onreadystatechange = () => {
-            if (regionsXHR.readyState === 4 && regionsXHR.status === 200) {
-              JSON.parse(regionsXHR.response).results.map(result => regions.push(result.name));
-              // console.log(regions);
-              regions.forEach((region) => {
-                const newOption = document.createElement("OPTION");
-                newOption.setAttribute("value", region);
-                const newText = document.createTextNode(region);
-                newOption.appendChild(newText);
-                regionSelector.appendChild(newOption);
-              });
-            }
-          }
-          regionsXHR.open("GET", regionsUrl, true);
-          regionsXHR.send();
-
-        } else {
-          // add error message for not being able to retrieve types from api
-          // add those types from static data
-
+            typeSelector.appendChild(addOption(type));
+          }); 
+        } else if (typesXHR.readyState === 4 && typesXHR.status === 404){
+          const warning = addParagraph('Types from POKEAPI could NOT be retrieved. Status 404 not found.');
+          warning.classList.add('form__warning');
+          header.appendChild(warning);
         }
     };
     typesXHR.open("GET", typesUrl, true);
     typesXHR.send();
-
-
-
   };  
   if (document.readyState != 'loading') {fn()}
   else {document.addEventListener('DOMContentLoaded', fn)}
 })();
 
+const addOption = ((content) => {
+  const newOption = document.createElement("OPTION");
+  newOption.setAttribute("value", content);
+  const newText = document.createTextNode(content);
+  newOption.appendChild(newText);
+  return newOption;
+});
+
+document.getElementById('challenge-button').addEventListener('click', (event) => {
+  event.preventDefault();
+  const sectionChallenge = document.getElementById('section-challenge');
+  toggleWarning(sectionChallenge);
+  toggleCard(sectionChallenge);
+  const first = Number(document.getElementById('first-operand').value);
+  const second = Number(document.getElementById('second-operand').value);
+  if (first * second === 802) {
+    const pokemonCardWrapper = document.createElement("DIV");
+    pokemonCardWrapper.classList.add('pokemon-card-wrapper')
+    sectionChallenge.appendChild(pokemonCardWrapper);
+    fetchPokemonByIDToWrapper(pokemonCardWrapper, second);
+    fetchPokemonByIDToWrapper(pokemonCardWrapper, first);   
+  } else {
+    const warning = addParagraph('802 = 401 * 2. Try this example first. Also, only NUMBERS are allowed');
+    warning.classList.add('form__warning');
+    sectionChallenge.appendChild(warning);
+  }
+});
+
 document.getElementById('form-1-button').addEventListener('click', (event) => {
   event.preventDefault();
   const section1 = document.getElementById('section-1');
   const pokemonId = document.getElementById('pokemon-id').value;
+  toggleWarning(section1);
+  toggleCard(section1);
   console.log(pokemonId);
 
   const pokemonXHR = new XMLHttpRequest();
@@ -74,10 +71,11 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
       const response = JSON.parse(pokemonXHR.response);
       const pokemonCard = document.createElement("DIV");
       const pokemonTypesWrapper = document.createElement("DIV");
+      const pokemonMovesWrapper = document.createElement("DIV");
       pokemonCard.classList.add('pokemon-card');
       section1.appendChild(pokemonCard);
       // add class pokemon-card
-      const pokemonName = addParagraph(response.name);
+      const pokemonName = addParagraph(response.name.toUpperCase( ));
       pokemonName.classList.add('pokemon-card__name');
       pokemonCard.appendChild(pokemonName);
 
@@ -86,7 +84,10 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
       pokemonCard.appendChild(pokemonSprite);
 
       const pokemonTypes = addParagraph('Type(s):');
+      pokemonTypes.classList.add('bold');
+      pokemonTypes.classList.add('margin--no');
       pokemonCard.appendChild(pokemonTypes);
+      
       pokemonTypesWrapper.classList.add('pokemon-card__type-wrapper')
       pokemonCard.appendChild(pokemonTypesWrapper);
 
@@ -99,40 +100,22 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
       }
 
       const pokemonMoves = addParagraph('Moves:');
+      pokemonMoves.classList.add('bold');
+      pokemonMoves.classList.add('margin--no');
       pokemonCard.appendChild(pokemonMoves);
+
+      pokemonMovesWrapper.classList.add('pokemon-card__move-wrapper')
+      pokemonCard.appendChild(pokemonMovesWrapper);
       for (let i = 0; i < 4; i++) {
         let elem = addParagraph(response.moves[i].move.name);
-        pokemonCard.appendChild(elem);
+        elem.classList.add('pokemon-card__move')
+        pokemonMovesWrapper.appendChild(elem);
       }
-
-
-
-      // add p tag with pokemon name
-
-      // add img tag with sprite
-
-      // add p tag with type name
-
-      // add p tag with 2nd if exists type name
-
-      // add p tag 
-
-
-
-
-      // response.name
-
-      // response.sprites.front_default
-
-      // response.types[0].type.name
-      // response.types[1].type.name
-      
-      // response.moves[0,1,2,3].move.name
-
-      // 
-
-
-      
+    } else if (pokemonXHR.readyState === 4 && pokemonXHR.status === 404) {
+      const warning = addParagraph('There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃');
+      warning.classList.add('form__warning');
+      section1.appendChild(warning);
+      // displayWarning(section1, 'There is no pokemon with this ID');
     }
   }
   pokemonXHR.open("GET", pokemonUrl, true);
@@ -141,63 +124,117 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
 
 document.getElementById('form-2-button').addEventListener('click', (event) => {
   event.preventDefault();
-  // const section1 = document.getElementById('section-1');
-  // const pokemonId = document.getElementById('pokemon-id').value;
-  // console.log(pokemonId);
-  // let pokemonId = ;
-  // const pokemonFound = requestPokemonByType(event.target.value);
+  const section2 = document.getElementById('section-2');
+  const allTypes = [];
+  for (let i = 0; i < 20; i++) {
+    allTypes.push(document.getElementById('types-selector').options[i].text);
+  }
+  // const allTypes = document.getElementById('types-selector').options[i].text
+  toggleWarning(section2);
+  toggleCard(section2);
   const input = document.getElementById('type').value;
-  console.log(input);
+  if (allTypes.indexOf(input.toLowerCase()) > -1) {
+    const hasType = allPokemons.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase());
   
-
-  const hasType = allPokemons.filter((pokemon) => pokemon.types[0].type.name == input);
+    const pokemonRequested = hasType[getRandomInt(hasType.length)];
   
-  console.log('okkkk', hasType[getRandomInt(hasType.length)]);
-
+    const pokemonCard = document.createElement("DIV");
+    const pokemonTypesWrapper = document.createElement("DIV");
+    const pokemonMovesWrapper = document.createElement("DIV");
+    pokemonCard.classList.add('pokemon-card');
+    section2.appendChild(pokemonCard);
+    // add class pokemon-card
+    const pokemonName = addParagraph(pokemonRequested.name.toUpperCase( ));
+    pokemonName.classList.add('pokemon-card__name');
+    pokemonCard.appendChild(pokemonName);
+  
+    const pokemonSprite = addImage(pokemonRequested.sprites.front_default);
+    pokemonSprite.classList.add('pokemon-card__sprite');
+    pokemonCard.appendChild(pokemonSprite);
+  
+    const pokemonTypes = addParagraph('Type(s):');
+    pokemonTypes.classList.add('bold');
+    pokemonTypes.classList.add('margin--no');
+    pokemonCard.appendChild(pokemonTypes);
     
-  // }
-  // console.log('YAY: ', pokemonFound);
+    pokemonTypesWrapper.classList.add('pokemon-card__type-wrapper')
+    pokemonCard.appendChild(pokemonTypesWrapper);
   
-  // console.log('found it! ')
-  console.log(allPokemons);
+    const pokemonType1 = addParagraph(pokemonRequested.types[0].type.name);
+    pokemonType1.classList.add('pokemon-card__type');
+    pokemonTypesWrapper.appendChild(pokemonType1);
+    if (pokemonRequested.types.length > 1) {
+      const pokemonType2 = addParagraph(pokemonRequested.types[1].type.name);
+      pokemonTypesWrapper.appendChild(pokemonType2);
+    }
   
+    const pokemonMoves = addParagraph('Moves:');
+    pokemonMoves.classList.add('bold');
+    pokemonMoves.classList.add('margin--no');
+    pokemonCard.appendChild(pokemonMoves);
+  
+    pokemonMovesWrapper.classList.add('pokemon-card__move-wrapper')
+    pokemonCard.appendChild(pokemonMovesWrapper);
+    for (let i = 0; i < 4; i++) {
+      let elem = addParagraph(pokemonRequested.moves[i].move.name);
+      elem.classList.add('pokemon-card__move')
+      pokemonMovesWrapper.appendChild(elem);
+    }
+  } else {
+    const warning = addParagraph('That is not a Pokémon Type. Please open the dropdown list. Example: Fire');
+    warning.classList.add('form__warning');
+    section2.appendChild(warning);
+  }
 });
 
-const requestPokemonByType = (typeToCheck) => {
-  const pokemonXHR = new XMLHttpRequest();
-  const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${getRandomInt(807)}/`;
-  pokemonXHR.onreadystatechange = () => {
-    if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
-      console.log(JSON.parse(pokemonXHR.response)); 
-      const response = JSON.parse(pokemonXHR.response);
-      const types = response.types;
-      if (types.length > 1) {
-        if (types[1].type.name == typeToCheck) {
-          console.log('here');
-          
-          return response.name;
-        }
-      } else if (types.length == 1) {
-        if (types[0].type.name == typeToCheck) {
-          return response.name;
-        }
-      } else {
-        requestPokemonByType(typeToCheck);
-      }
-    }
-      
+const addPokemonCard = ((pokemon) => {
+  console.log(pokemon);
+  
+  const pokemonCard = document.createElement("DIV");
+  const pokemonTypesWrapper = document.createElement("DIV");
+  const pokemonMovesWrapper = document.createElement("DIV");
+  pokemonCard.classList.add('pokemon-card');
+  // section1.appendChild(pokemonCard);
+  // add class pokemon-card
+  const pokemonName = addParagraph(pokemon.name.toUpperCase());
+  pokemonName.classList.add('pokemon-card__name');
+  pokemonCard.appendChild(pokemonName);
+
+  const pokemonSprite = addImage(pokemon.sprites.front_default);
+  pokemonSprite.classList.add('pokemon-card__sprite');
+  pokemonCard.appendChild(pokemonSprite);
+
+  const pokemonTypes = addParagraph('Type(s):');
+  pokemonTypes.classList.add('bold');
+  pokemonTypes.classList.add('margin--no');
+  pokemonCard.appendChild(pokemonTypes);
+  
+  pokemonTypesWrapper.classList.add('pokemon-card__type-wrapper')
+  pokemonCard.appendChild(pokemonTypesWrapper);
+
+  const pokemonType1 = addParagraph(pokemon.types[0].type.name);
+  pokemonType1.classList.add('pokemon-card__type');
+  pokemonTypesWrapper.appendChild(pokemonType1);
+  if (pokemon.types.length > 1) {
+    const pokemonType2 = addParagraph(pokemon.types[1].type.name);
+    pokemonTypesWrapper.appendChild(pokemonType2);
   }
-  pokemonXHR.open("GET", pokemonUrl, true);
-  pokemonXHR.send();
-};
 
+  const pokemonMoves = addParagraph('Moves:');
+  pokemonMoves.classList.add('bold');
+  pokemonMoves.classList.add('margin--no');
+  pokemonCard.appendChild(pokemonMoves);
 
+  pokemonMovesWrapper.classList.add('pokemon-card__move-wrapper')
+  pokemonCard.appendChild(pokemonMovesWrapper);
+  for (let i = 0; i < 4; i++) {
+    let elem = addParagraph(pokemon.moves[i].move.name);
+    elem.classList.add('pokemon-card__move')
+    pokemonMovesWrapper.appendChild(elem);
+  }
+  return pokemonCard;
+});
 
-// on load, add types and 
-
-// /type
-
-// and regions /pokedex
 
 const addParagraph = ((content) => {
   const p = document.createElement('p');
@@ -218,13 +255,10 @@ const getAllPokemons = ((counter) => {
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${counter}/`;
   pokemonXHR.onreadystatechange = () => {
     if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
-      // console.log(JSON.parse(pokemonXHR.response)); 
       allPokemons.push(JSON.parse(pokemonXHR.response));
       counter += 1;
       if (counter == 200) {
-        console.log('done');
         return;
-        // return allPokemons;
       } else {
         getAllPokemons(counter);
       }
@@ -234,17 +268,30 @@ const getAllPokemons = ((counter) => {
   pokemonXHR.send();
 });
 
+const toggleWarning = ((section)=> {
+  if (section.contains(section.querySelector('.form__warning'))) {
+    section.removeChild(section.childNodes[section.childNodes.length - 1]);
+  }
+});
 
-// finish cards
+const toggleCard = ((section)=> {
+  if (section.contains(section.querySelector('.pokemon-card'))) {
+    section.removeChild(section.childNodes[section.childNodes.length - 1]);
+  }
+});
 
-// finish random pokemon
+const fetchPokemonByIDToWrapper = ((wrapper, id) => {
+  const pokemonXHR = new XMLHttpRequest();
+  const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+  pokemonXHR.onreadystatechange = () => {
+    if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
+      wrapper.appendChild(addPokemonCard(JSON.parse(pokemonXHR.response)));
+    }
+  }
+  pokemonXHR.open("GET", pokemonUrl, true);
+  pokemonXHR.send();
+});
 
-// add warnings - look at project week 1
-
-// add form input red - look at porject week 1
-
-
-// add navigation
 
 
 // do unit testing for: 
@@ -256,6 +303,4 @@ const getAllPokemons = ((counter) => {
  * first input is less than 403 and its an even number 
  */
 // unit testing for multiplication lmao 
-
- // styling to pokemon card: smaller 
 
