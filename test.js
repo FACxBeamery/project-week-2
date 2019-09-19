@@ -1,11 +1,11 @@
 var test = require('tape');
-// var fizzbuzz = require('./index.js');
+var myFunctions = require("./pureFunctions.js");
+var capFirstLetAndRemoveHyphen = myFunctions.capFirstLetAndRemoveHyphen;
 
-
-// test('Testing fizzbuzz with input string number', (t) => {
-//   let actual = fizzbuzz('15');
-//   let expected = 'Input should be a number';
-//   t.equal(actual, expected, 'Fizzbuzz should return fizzbuzz');
-//   t.end();
-// });
+test('Capitalises first letter and removes hyphen', (t) => {
+  let actual = capFirstLetAndRemoveHyphen('fire-fighter');
+  let expected = 'Fire fighter';
+  t.equal(actual, expected, 'capFirstLetAndRemoveHyphen returns formatted string ');
+  t.end();
+});
 
