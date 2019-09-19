@@ -81,7 +81,10 @@ document.getElementById('form-2-button').addEventListener('click', (event) => {
   toggleWarning(section2);
   toggleCard(section2);
   const input = document.getElementById('type').value;
-  if (allTypes.indexOf(input.toLowerCase()) > -1) {
+  if (strExistsInArray(input.toLowerCase(), allTypes)) {
+
+   
+
     const hasType = filterByType(allPokemons, input.toLowerCase());
     const pokemonRequested = hasType[getRandomInt(hasType.length)];
 
@@ -205,7 +208,7 @@ const toggleWarning = ((section)=> {
   }
 });
 
-const toggleCard = ((section)=> {
+const toggleCard = ((section) => {
   if (section.contains(section.querySelector('.pokemon-card'))) {
     section.removeChild(section.childNodes[section.childNodes.length - 1]);
   }
@@ -215,9 +218,9 @@ const getRandomInt = ((max) => Math.floor(Math.random() * Math.floor(max)));
 
 const filterByType = ((array, input) =>   array.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase()));
 
-const capFirstLetAndRemoveHyphen = ((str) => {
-  let formattedString = str.replace(/-/, ' ');
-  return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
-});
+// const capFirstLetAndRemoveHyphen = ((str) => {
+//   let formattedString = str.replace(/-/, ' ');
+//   return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
+// });
 
-// do unit testing
+// const strExistsInArray = ((input, arrayToCheck) => arrayToCheck.indexOf(input) > -1);
