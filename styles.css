@@ -30,6 +30,7 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .header__image {
@@ -116,10 +117,6 @@ html, body {
     font-family: 'Source Code Pro', monospace;
 }
 
-.form__input--small {
-    height: 7vh;
-}
-
 .form__input-list {
     height: 7vh;
     width: 27vw;
@@ -161,7 +158,6 @@ html, body {
     padding: 0.5rem;
     background: white;
     width: 70vw;
-    /* margin-right: 0.8rem; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -172,8 +168,17 @@ html, body {
 }
 
 .pokemon-card--small {
-    width: 40vw;
     margin-right: 1rem;
+    padding: 0.5rem;
+    background: white;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #beacf1;
+    padding: 1rem;
+    box-shadow: 9px 8px 0px 0px #beacf1;
 }
 
 .pokemon-card__name {
@@ -189,6 +194,7 @@ html, body {
 
 .pokemon-card__move-wrapper {
     display: flex;
+    flex-wrap: wrap;
 }
 .pokemon-card__move {
     margin-right: 0.5rem;
@@ -220,12 +226,17 @@ html, body {
     }
     .pokemon-card {
         font-size: 0.5rem;
-        /* width: 40vw; */
-        
+    }
+    .pokemon-card--small {
+        font-size: 0.4rem;
     }
    
     .form {
         width: 60vw;
+    }
+
+    .form__input {
+        font-size: 1rem;
     }
     .form__input-list {
         width: 48vw;
@@ -240,5 +251,9 @@ html, body {
 
     .form__input--large {
         width: 35vw;    
+    }
+
+    .form__helper {
+        font-size: 1rem;
     }
 }
