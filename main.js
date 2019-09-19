@@ -27,14 +27,6 @@ var allPokemons = [];
   else {document.addEventListener('DOMContentLoaded', fn)}
 })();
 
-const addOption = ((content) => {
-  const newOption = document.createElement("OPTION");
-  newOption.setAttribute("value", content);
-  const newText = document.createTextNode(content);
-  newOption.appendChild(newText);
-  return newOption;
-});
-
 document.getElementById('challenge-button').addEventListener('click', (event) => {
   event.preventDefault();
   const sectionChallenge = document.getElementById('section-challenge');
@@ -48,6 +40,8 @@ document.getElementById('challenge-button').addEventListener('click', (event) =>
     sectionChallenge.appendChild(pokemonCardWrapper);
     fetchPokemonByIDToWrapper(pokemonCardWrapper, second);
     fetchPokemonByIDToWrapper(pokemonCardWrapper, first);   
+    pokemonCardWrapper.childNodes[0].classList.add('pokemon-card--small');
+    pokemonCardWrapper.childNodes[1].classList.add('pokemon-card--small');
   } else {
     const warning = addParagraph('802 = 401 * 2. Try this example first. Also, only NUMBERS are allowed');
     warning.classList.add('form__warning');
@@ -292,7 +286,13 @@ const fetchPokemonByIDToWrapper = ((wrapper, id) => {
   pokemonXHR.send();
 });
 
-
+const addOption = ((content) => {
+  const newOption = document.createElement("OPTION");
+  newOption.setAttribute("value", content);
+  const newText = document.createTextNode(content);
+  newOption.appendChild(newText);
+  return newOption;
+});
 
 // do unit testing for: 
 
