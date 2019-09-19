@@ -34,16 +34,14 @@ document.getElementById('challenge-button').addEventListener('click', (event) =>
   toggleCard(sectionChallenge);
   const first = Number(document.getElementById('first-operand').value);
   const second = Number(document.getElementById('second-operand').value);
-  if (first * second === 802) {
+  if (first * second === 800) {
     const pokemonCardWrapper = document.createElement("DIV");
     pokemonCardWrapper.classList.add('pokemon-card-wrapper')
     sectionChallenge.appendChild(pokemonCardWrapper);
     fetchPokemonByIDToWrapper(pokemonCardWrapper, second);
     fetchPokemonByIDToWrapper(pokemonCardWrapper, first);   
-    pokemonCardWrapper.childNodes[0].classList.add('pokemon-card--small');
-    pokemonCardWrapper.childNodes[1].classList.add('pokemon-card--small');
   } else {
-    const warning = addParagraph('802 = 401 * 2. Try this example first. Also, only NUMBERS are allowed');
+    const warning = addParagraph('800 = 400 * 2. Try this example first. Also, only NUMBERS are allowed');
     warning.classList.add('form__warning');
     sectionChallenge.appendChild(warning);
   }
@@ -55,7 +53,6 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
   const pokemonId = document.getElementById('pokemon-id').value;
   toggleWarning(section1);
   toggleCard(section1);
-  console.log(pokemonId);
 
   const pokemonXHR = new XMLHttpRequest();
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`;
@@ -109,7 +106,6 @@ document.getElementById('form-1-button').addEventListener('click', (event) => {
       const warning = addParagraph('There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃');
       warning.classList.add('form__warning');
       section1.appendChild(warning);
-      // displayWarning(section1, 'There is no pokemon with this ID');
     }
   }
   pokemonXHR.open("GET", pokemonUrl, true);
@@ -123,7 +119,6 @@ document.getElementById('form-2-button').addEventListener('click', (event) => {
   for (let i = 0; i < 20; i++) {
     allTypes.push(document.getElementById('types-selector').options[i].text);
   }
-  // const allTypes = document.getElementById('types-selector').options[i].text
   toggleWarning(section2);
   toggleCard(section2);
   const input = document.getElementById('type').value;
@@ -131,49 +126,56 @@ document.getElementById('form-2-button').addEventListener('click', (event) => {
     const hasType = allPokemons.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase());
   
     const pokemonRequested = hasType[getRandomInt(hasType.length)];
-  
-    const pokemonCard = document.createElement("DIV");
-    const pokemonTypesWrapper = document.createElement("DIV");
-    const pokemonMovesWrapper = document.createElement("DIV");
-    pokemonCard.classList.add('pokemon-card');
-    section2.appendChild(pokemonCard);
-    // add class pokemon-card
-    const pokemonName = addParagraph(pokemonRequested.name.toUpperCase( ));
-    pokemonName.classList.add('pokemon-card__name');
-    pokemonCard.appendChild(pokemonName);
-  
-    const pokemonSprite = addImage(pokemonRequested.sprites.front_default);
-    pokemonSprite.classList.add('pokemon-card__sprite');
-    pokemonCard.appendChild(pokemonSprite);
-  
-    const pokemonTypes = addParagraph('Type(s):');
-    pokemonTypes.classList.add('bold');
-    pokemonTypes.classList.add('margin--no');
-    pokemonCard.appendChild(pokemonTypes);
+
+    if (pokemonRequested) {
+      const pokemonCard = document.createElement("DIV");
+      const pokemonTypesWrapper = document.createElement("DIV");
+      const pokemonMovesWrapper = document.createElement("DIV");
+      pokemonCard.classList.add('pokemon-card');
+      section2.appendChild(pokemonCard);
+      // add class pokemon-card
+      const pokemonName = addParagraph(pokemonRequested.name.toUpperCase( ));
+      pokemonName.classList.add('pokemon-card__name');
+      pokemonCard.appendChild(pokemonName);
     
-    pokemonTypesWrapper.classList.add('pokemon-card__type-wrapper')
-    pokemonCard.appendChild(pokemonTypesWrapper);
-  
-    const pokemonType1 = addParagraph(pokemonRequested.types[0].type.name);
-    pokemonType1.classList.add('pokemon-card__type');
-    pokemonTypesWrapper.appendChild(pokemonType1);
-    if (pokemonRequested.types.length > 1) {
-      const pokemonType2 = addParagraph(pokemonRequested.types[1].type.name);
-      pokemonTypesWrapper.appendChild(pokemonType2);
+      const pokemonSprite = addImage(pokemonRequested.sprites.front_default);
+      pokemonSprite.classList.add('pokemon-card__sprite');
+      pokemonCard.appendChild(pokemonSprite);
+    
+      const pokemonTypes = addParagraph('Type(s):');
+      pokemonTypes.classList.add('bold');
+      pokemonTypes.classList.add('margin--no');
+      pokemonCard.appendChild(pokemonTypes);
+      
+      pokemonTypesWrapper.classList.add('pokemon-card__type-wrapper')
+      pokemonCard.appendChild(pokemonTypesWrapper);
+    
+      const pokemonType1 = addParagraph(pokemonRequested.types[0].type.name);
+      pokemonType1.classList.add('pokemon-card__type');
+      pokemonTypesWrapper.appendChild(pokemonType1);
+      if (pokemonRequested.types.length > 1) {
+        const pokemonType2 = addParagraph(pokemonRequested.types[1].type.name);
+        pokemonTypesWrapper.appendChild(pokemonType2);
+      }
+    
+      const pokemonMoves = addParagraph('Moves:');
+      pokemonMoves.classList.add('bold');
+      pokemonMoves.classList.add('margin--no');
+      pokemonCard.appendChild(pokemonMoves);
+    
+      pokemonMovesWrapper.classList.add('pokemon-card__move-wrapper')
+      pokemonCard.appendChild(pokemonMovesWrapper);
+      for (let i = 0; i < 4; i++) {
+        let elem = addParagraph(pokemonRequested.moves[i].move.name);
+        elem.classList.add('pokemon-card__move')
+        pokemonMovesWrapper.appendChild(elem);
+      }
+    } else {
+      const warning = addParagraph('Pokémon not found with this type. Please choose another from the dropdown list');
+      warning.classList.add('form__warning');
+      section2.appendChild(warning);
     }
   
-    const pokemonMoves = addParagraph('Moves:');
-    pokemonMoves.classList.add('bold');
-    pokemonMoves.classList.add('margin--no');
-    pokemonCard.appendChild(pokemonMoves);
-  
-    pokemonMovesWrapper.classList.add('pokemon-card__move-wrapper')
-    pokemonCard.appendChild(pokemonMovesWrapper);
-    for (let i = 0; i < 4; i++) {
-      let elem = addParagraph(pokemonRequested.moves[i].move.name);
-      elem.classList.add('pokemon-card__move')
-      pokemonMovesWrapper.appendChild(elem);
-    }
   } else {
     const warning = addParagraph('That is not a Pokémon Type. Please open the dropdown list. Example: Fire');
     warning.classList.add('form__warning');
@@ -188,8 +190,6 @@ const addPokemonCard = ((pokemon) => {
   const pokemonTypesWrapper = document.createElement("DIV");
   const pokemonMovesWrapper = document.createElement("DIV");
   pokemonCard.classList.add('pokemon-card');
-  // section1.appendChild(pokemonCard);
-  // add class pokemon-card
   const pokemonName = addParagraph(pokemon.name.toUpperCase());
   pokemonName.classList.add('pokemon-card__name');
   pokemonCard.appendChild(pokemonName);
@@ -279,7 +279,12 @@ const fetchPokemonByIDToWrapper = ((wrapper, id) => {
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}/`;
   pokemonXHR.onreadystatechange = () => {
     if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
-      wrapper.appendChild(addPokemonCard(JSON.parse(pokemonXHR.response)));
+      const pokemonCard = addPokemonCard(JSON.parse(pokemonXHR.response));
+      console.log(pokemonCard);
+      
+      pokemonCard.classList.remove('pokemon-card');
+      pokemonCard.classList.add('pokemon-card--small');
+      wrapper.appendChild(pokemonCard);
     }
   }
   pokemonXHR.open("GET", pokemonUrl, true);
