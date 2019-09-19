@@ -82,9 +82,6 @@ document.getElementById('form-2-button').addEventListener('click', (event) => {
   toggleCard(section2);
   const input = document.getElementById('type').value;
   if (strExistsInArray(input.toLowerCase(), allTypes)) {
-
-   
-
     const hasType = filterByType(allPokemons, input.toLowerCase());
     const pokemonRequested = hasType[getRandomInt(hasType.length)];
 
@@ -153,7 +150,6 @@ const fetchPokemonByIDToWrapper = ((wrapper, id) => {
   pokemonXHR.onreadystatechange = () => {
     if (pokemonXHR.readyState === 4 && pokemonXHR.status === 200) {
       const pokemonCard = addPokemonCard(JSON.parse(pokemonXHR.response));
-      
       pokemonCard.classList.remove('pokemon-card');
       pokemonCard.classList.add('pokemon-card--small');
       wrapper.appendChild(pokemonCard);
@@ -217,10 +213,3 @@ const toggleCard = ((section) => {
 const getRandomInt = ((max) => Math.floor(Math.random() * Math.floor(max)));
 
 const filterByType = ((array, input) =>   array.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase()));
-
-// const capFirstLetAndRemoveHyphen = ((str) => {
-//   let formattedString = str.replace(/-/, ' ');
-//   return formattedString.charAt(0).toUpperCase() + formattedString.slice(1);
-// });
-
-// const strExistsInArray = ((input, arrayToCheck) => arrayToCheck.indexOf(input) > -1);
