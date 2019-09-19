@@ -18,13 +18,19 @@ html, body {
     letter-spacing: normal;
     margin-right: 1.5rem;
     text-decoration: none;
-    color: black;
+    color: #444;
     font-weight: 700;
+    transition: color 0.5s;
+}
+
+.nav__link:hover {
+    color: #3280ff;
 }
 
 .header {
     width: 100vw;
     height: 90vh;
+    color: black;
     display: flex;
     background: #fbdd7d;;
     flex-direction: column;
