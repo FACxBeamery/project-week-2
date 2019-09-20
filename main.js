@@ -11,16 +11,12 @@ var allPokemons = [];
 		const header = document.querySelector("#header");
 		typesXHR.onreadystatechange = () => {
 			if (typesXHR.readyState === 4 && typesXHR.status === 200) {
-				JSON.parse(typesXHR.response).results.map(result =>
-					types.push(result.name)
-				);
+				JSON.parse(typesXHR.response).results.map(result => types.push(result.name));
 				types.forEach(type => {
 					typeSelector.appendChild(addOption(type));
 				});
 			} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
-				const warning = addParagraph(
-					"Types from POKEAPI could NOT be retrieved. Status 404 not found."
-				);
+				const warning = addParagraph("Types from POKEAPI could NOT be retrieved. Status 404 not found.");
 				warning.classList.add("form__warning");
 				header.appendChild(warning);
 			}
@@ -49,9 +45,7 @@ document.getElementById("challenge-button").addEventListener("click", event => {
 		fetchPokemonByIDToWrapper(pokemonCardWrapper, second);
 		fetchPokemonByIDToWrapper(pokemonCardWrapper, first);
 	} else {
-		const warning = addParagraph(
-			"800 = 400 * 2. Try this example first. Also, only NUMBERS are allowed"
-		);
+		const warning = addParagraph("800 = 400 * 2. Try this example first. Also, only NUMBERS are allowed");
 		warning.classList.add("form__warning");
 		sectionChallenge.appendChild(warning);
 	}
@@ -72,9 +66,7 @@ document.getElementById("form-1-button").addEventListener("click", event => {
 			const pokemonCard = addPokemonCard(response);
 			section1.appendChild(pokemonCard);
 		} else if (pokemonXHR.readyState === 4 && pokemonXHR.status === 404) {
-			const warning = addParagraph(
-				"There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃"
-			);
+			const warning = addParagraph("There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃");
 			warning.classList.add("form__warning");
 			section1.appendChild(warning);
 		}
@@ -87,11 +79,7 @@ document.getElementById("form-2-button").addEventListener("click", event => {
 	event.preventDefault();
 	const section2 = document.getElementById("section-2");
 	const allTypes = [];
-	for (
-		let i = 0;
-		i < document.getElementById("types-selector").options.length;
-		i++
-	) {
+	for (let i = 0; i < document.getElementById("types-selector").options.length; i++) {
 		allTypes.push(document.getElementById("types-selector").options[i].text);
 	}
 	toggleWarning(section2);
@@ -105,16 +93,12 @@ document.getElementById("form-2-button").addEventListener("click", event => {
 			const pokemonCard = addPokemonCard(pokemonRequested);
 			section2.appendChild(pokemonCard);
 		} else {
-			const warning = addParagraph(
-				"Pokémon not found with this type. Please choose another from the dropdown list"
-			);
+			const warning = addParagraph("Pokémon not found with this type. Please choose another from the dropdown list");
 			warning.classList.add("form__warning");
 			section2.appendChild(warning);
 		}
 	} else {
-		const warning = addParagraph(
-			"That is not a Pokémon Type. Please open the dropdown list. Example: Fire"
-		);
+		const warning = addParagraph("That is not a Pokémon Type. Please open the dropdown list. Example: Fire");
 		warning.classList.add("form__warning");
 		section2.appendChild(warning);
 	}
@@ -125,9 +109,7 @@ const addPokemonCard = pokemon => {
 	const pokemonTypesWrapper = document.createElement("DIV");
 	const pokemonMovesWrapper = document.createElement("DIV");
 	pokemonCard.classList.add("pokemon-card");
-	const pokemonName = addParagraph(
-		capFirstLetAndRemoveHyphen(`#${pokemon.id} ${pokemon.name}`)
-	);
+	const pokemonName = addParagraph(capFirstLetAndRemoveHyphen(`#${pokemon.id} ${pokemon.name}`));
 	pokemonName.classList.add("pokemon-card__name");
 	pokemonCard.appendChild(pokemonName);
 
@@ -143,15 +125,11 @@ const addPokemonCard = pokemon => {
 	pokemonTypesWrapper.classList.add("pokemon-card__type-wrapper");
 	pokemonCard.appendChild(pokemonTypesWrapper);
 
-	const pokemonType1 = addParagraph(
-		capFirstLetAndRemoveHyphen(pokemon.types[0].type.name)
-	);
+	const pokemonType1 = addParagraph(capFirstLetAndRemoveHyphen(pokemon.types[0].type.name));
 	pokemonType1.classList.add("pokemon-card__type");
 	pokemonTypesWrapper.appendChild(pokemonType1);
 	if (pokemon.types.length > 1) {
-		const pokemonType2 = addParagraph(
-			capFirstLetAndRemoveHyphen(pokemon.types[1].type.name)
-		);
+		const pokemonType2 = addParagraph(capFirstLetAndRemoveHyphen(pokemon.types[1].type.name));
 		pokemonTypesWrapper.appendChild(pokemonType2);
 	}
 
@@ -163,9 +141,7 @@ const addPokemonCard = pokemon => {
 	pokemonMovesWrapper.classList.add("pokemon-card__move-wrapper");
 	pokemonCard.appendChild(pokemonMovesWrapper);
 	for (let i = 0; i < 4; i++) {
-		let elem = addParagraph(
-			capFirstLetAndRemoveHyphen(pokemon.moves[i].move.name)
-		);
+		let elem = addParagraph(capFirstLetAndRemoveHyphen(pokemon.moves[i].move.name));
 		elem.classList.add("pokemon-card__move");
 		pokemonMovesWrapper.appendChild(elem);
 	}
@@ -239,5 +215,4 @@ const toggleCard = section => {
 
 const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
 
-const filterByType = (array, input) =>
-	array.filter(pokemon => pokemon.types[0].type.name == input.toLowerCase());
+const filterByType = (array, input) => array.filter(pokemon => pokemon.types[0].type.name == input.toLowerCase());
