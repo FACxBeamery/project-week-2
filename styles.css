@@ -17,6 +17,7 @@ body {
 
 .nav__link {
 	letter-spacing: normal;
+	font-size: 1rem;
 	margin-right: 1.5rem;
 	text-decoration: none;
 	color: #444;
@@ -90,9 +91,9 @@ body {
 	flex-direction: column;
 	text-align: center;
 	align-items: center;
-	border: 2px solid #c8d231;
-	padding: 1rem;
-	box-shadow: 9px 8px 0px 0px #c8d231;
+	border: 0.2rem solid #c8d231;
+    padding: 1rem;
+    box-shadow: 0.6rem 0.5rem 0rem 0rem #c8d231;
 	background: #f8f8f8;
 }
 
@@ -113,7 +114,7 @@ body {
 	height: 12vh;
 	border: none;
 	background: none;
-	border-bottom: 3px solid #444;
+	border-bottom: 0.2rem solid #444;
 	outline: none;
 	font-size: 2rem;
 	text-align: center;
@@ -168,28 +169,28 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 2px solid #beacf1;
+	border: 0.2rem solid #beacf1;
 	padding: 1rem;
-	box-shadow: 9px 8px 0px 0px #beacf1;
+	box-shadow: 0.6rem 0.5rem 0rem 0rem #beacf1;
 }
 
 .pokemon-card--small {
 	margin-right: 1rem;
 	padding: 0.5rem;
 	background: white;
-	width: 30vw;
+	width: 40vw;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 2px solid #beacf1;
+	border: 0.2rem solid #beacf1;
 	padding: 1rem;
-	box-shadow: 9px 8px 0px 0px #beacf1;
+	box-shadow: 0.6rem 0.5rem 0rem 0rem #beacf1;
 }
 
 .pokemon-card__name {
-	border-bottom: 1px solid #e8e8e8;
-	padding-bottom: 5px;
+	border-bottom: 0.2rem solid #e8e8e8;
+	padding-bottom: 0.8rem;
 	font-weight: 700;
 }
 
