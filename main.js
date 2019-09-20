@@ -1,37 +1,39 @@
 var allPokemons = [];
 
-(() => {
-	function fn() {
-		getAllPokemons(1);
+const fn = (() => {
+	getAllPokemons(1);
 
-		const types = [];
-		const typeSelector = document.querySelector("#types-selector");
-		const typesXHR = new XMLHttpRequest();
-		const typesUrl = "https://pokeapi.co/api/v2/type/";
-		const header = document.querySelector("#header");
-		typesXHR.onreadystatechange = () => {
-			if (typesXHR.readyState === 4 && typesXHR.status === 200) {
-				JSON.parse(typesXHR.response).results.map((result) => types.push(result.name));
-				types.forEach((type) => {
-					typeSelector.appendChild(addOption(type));
-				});
-			} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
-				const warning = addParagraph(
-					"Types from POKEAPI could NOT be retrieved. Status 404 not found."
-				);
-				warning.classList.add("form__warning");
-				header.appendChild(warning);
-			}
-		};
-		typesXHR.open("GET", typesUrl, true);
-		typesXHR.send();
-	}
+	const types = [];
+	const typeSelector = document.querySelector("#types-selector");
+	const typesXHR = new XMLHttpRequest();
+	const typesUrl = "https://pokeapi.co/api/v2/type/";
+	const header = document.querySelector("#header");
+	typesXHR.onreadystatechange = () => {
+		if (typesXHR.readyState === 4 && typesXHR.status === 200) {
+			JSON.parse(typesXHR.response).results.map((result) => types.push(result.name));
+			types.forEach((type) => {
+				typeSelector.appendChild(addOption(type));
+			});
+		} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
+			const warning = addParagraph(
+				"Types from POKEAPI could NOT be retrieved. Status 404 not found."
+			);
+			warning.classList.add("form__warning");
+			header.appendChild(warning);
+		}
+	};
+	typesXHR.open("GET", typesUrl, true);
+	typesXHR.send();
+});
+
+(() => {
 	if (document.readyState != "loading") {
 		fn();
 	} else {
 		document.addEventListener("DOMContentLoaded", fn);
 	}
 })();
+
 
 document.getElementById("challenge-button").addEventListener("click", (event) => {
 	event.preventDefault();
