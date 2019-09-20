@@ -5,7 +5,9 @@ const capFirstLetAndRemoveHyphen = str => {
 
 const strExistsInArray = (input, arrayToCheck) => arrayToCheck.indexOf(input) > -1;
 
-module.exports = {
-	capFirstLetAndRemoveHyphen,
-	strExistsInArray
-};
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = {
+		capFirstLetAndRemoveHyphen,
+		strExistsInArray
+	};
+}
