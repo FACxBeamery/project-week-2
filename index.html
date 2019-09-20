@@ -1,69 +1,105 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Learn about Pokémon</title>
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900&display=swap" rel="stylesheet">
-    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsCiQEY4Pv9GOD7/Rjg+/0Y4Pv/GwKJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/45QZv+yXHr/slx6/7Jcev+Ubqr/ckha/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/6JysP9QUEj/XFpU/4hYZP+GbqL/noa6/5Bokv96UGD/MDAw/wAAAAAAAAAAAAAAAAAAAAAAAAAAxsCiQEhIQv9QUEj/sK6s//j4+P9cWlT/UFBI/1BQSP9QUEj/UFBI/0hIQv/GwKJAAAAAAAAAAAAAAAAAAAAAADg4Nv9QUEj/cGh0/2hkYP+wrqz/UFBI/7iY4P+4mOD/oIDI/2pibv9QUEj/ODg2/wAAAAAAAAAAAAAAAAAAAAA4ODb/tJTc/9Cw+P/QsPj/sJjM/9Cw+P/QsPj/yqry/7iY4P+4mOD/qIjQ/zg4Nv8AAAAAAAAAAAAAAAAAAAAAWFBi/9Cw+P/QsPj/0LD4/9Cw+P/QsPj/0LD4/9Cw+P/KqvL/uJjg/7iY4P9SSlz/AAAAAAAAAAAAAAAAAAAAAFhQYv/QsPj/0LD4/+LI+P/QsPj/0LD4/9Cw+P/QsPj/0LD4/7iY4P+4mOD/Ukpc/wAAAAAAAAAAAAAAAAAAAADGwKJAqJDG/+za+P/4+Pj/0Kz4/6Bg+P+gYPj/vpD4/9Cw+P++nub/ln60/8bAokAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMP/cwPj/4Mr4/6Bg+P+gYPj/oGD4/6Bg+P/EmPj/vp7m/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/4RUxv+gYPj/oGD4/6Bg+P+gYPj/hFTG/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGwKJATDxi/0w8Yv9MPGL/TDxi/8bAokAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD8PwAA8A8AAOAHAADgBwAAwAMAAMADAADAAwAAwAMAAOAHAADgBwAA8A8AAPw/AAD//wAA//8AAA==" rel="icon" type="image/x-icon" />
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,500,600,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxsCiQEY4Pv9GOD7/Rjg+/0Y4Pv/GwKJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/45QZv+yXHr/slx6/7Jcev+Ubqr/ckha/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/6JysP9QUEj/XFpU/4hYZP+GbqL/noa6/5Bokv96UGD/MDAw/wAAAAAAAAAAAAAAAAAAAAAAAAAAxsCiQEhIQv9QUEj/sK6s//j4+P9cWlT/UFBI/1BQSP9QUEj/UFBI/0hIQv/GwKJAAAAAAAAAAAAAAAAAAAAAADg4Nv9QUEj/cGh0/2hkYP+wrqz/UFBI/7iY4P+4mOD/oIDI/2pibv9QUEj/ODg2/wAAAAAAAAAAAAAAAAAAAAA4ODb/tJTc/9Cw+P/QsPj/sJjM/9Cw+P/QsPj/yqry/7iY4P+4mOD/qIjQ/zg4Nv8AAAAAAAAAAAAAAAAAAAAAWFBi/9Cw+P/QsPj/0LD4/9Cw+P/QsPj/0LD4/9Cw+P/KqvL/uJjg/7iY4P9SSlz/AAAAAAAAAAAAAAAAAAAAAFhQYv/QsPj/0LD4/+LI+P/QsPj/0LD4/9Cw+P/QsPj/0LD4/7iY4P+4mOD/Ukpc/wAAAAAAAAAAAAAAAAAAAADGwKJAqJDG/+za+P/4+Pj/0Kz4/6Bg+P+gYPj/vpD4/9Cw+P++nub/ln60/8bAokAAAAAAAAAAAAAAAAAAAAAAAAAAADAwMP/cwPj/4Mr4/6Bg+P+gYPj/oGD4/6Bg+P/EmPj/vp7m/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMDAw/4RUxv+gYPj/oGD4/6Bg+P+gYPj/hFTG/zAwMP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGwKJATDxi/0w8Yv9MPGL/TDxi/8bAokAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD8PwAA8A8AAOAHAADgBwAAwAMAAMADAADAAwAAwAMAAOAHAADgBwAA8A8AAPw/AAD//wAA//8AAA=="
+      rel="icon"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
     <nav class="nav">
-        <a class="nav__link" href="#section-challenge">Challenge of the day</a>
-        <a class="nav__link" href="#section-1">Pokémon by ID</a>
-        <a class="nav__link" href="#section-2">Pokémon by Type</a>
+      <a class="nav__link" href="#section-challenge">Challenge of the day</a>
+      <a class="nav__link" href="#section-1">Pokémon by ID</a>
+      <a class="nav__link" href="#section-2">Pokémon by Type</a>
     </nav>
     <header class="header">
-        <img class="header__image" src="https://icon-library.net/images/small-pokeball-icon/small-pokeball-icon-11.jpg" alt="">
-        <h1 class="header__title">
-            find your pokémon
-        </h1>
-        <h2 class="header__subtitle">
-            learn about my obsession.
-        </h2>
+      <img
+        class="header__image"
+        src="https://icon-library.net/images/small-pokeball-icon/small-pokeball-icon-11.jpg"
+        alt=""
+      />
+      <h1 class="header__title">
+        find your pokémon
+      </h1>
+      <h2 class="header__subtitle">
+        learn about my obsession.
+      </h2>
     </header>
 
     <main class="main">
-        <section class="section" id="section-challenge">
-            <h3 class="section__header">Challenge of the day</h3>
-            <form class="form">
-                <div class="form--row">
-                    <input class="form__input" type="number" name="first-operand" id="first-operand">
-                    <span class="form__helper">X</span>
-                    <input class="form__input" type="number" name="second-operand" id="second-operand">
-                    <span class="form__helper">=</span>
-                    <span class="form__helper">800</span>
-                </div>
-                <button type="sumbit" id="challenge-button" class="form__button">Test</button>
-            </form>
-        </section>
-        <section class="section" id="section-1">
-            <h3 class="section__header">
-                Search Pokémon By ID
-            </h3>
-            <form class="form">
-                <label class="form__label" for="pokemon-id">Pokémon ID</label>
-                <input class="form__input form__input--large" type="number" name="pokemon-id" id="pokemon-id">
-                <button id="form-1-button" class="form__button" type="submit">find my poke</button>
-            </form>
-        </section>
-        <section class="section" id="section-2">
-            <h3 class="section__header">
-                Get random Pokémon by their main type
-            </h3>
-            <form class="form">
-                <input class="form__input-list" list="types-selector" name="types" id="type">
-                <datalist id="types-selector">
-                </datalist>
-                <button class="form__button" id="form-2-button" type="submit">Find</button>
-            </form>
-        </section>
+      <section class="section" id="section-challenge">
+        <h3 class="section__header">Challenge of the day</h3>
+        <form class="form">
+          <div class="form--row">
+            <input
+              class="form__input"
+              type="number"
+              name="first-operand"
+              id="first-operand"
+            />
+            <span class="form__helper">X</span>
+            <input
+              class="form__input"
+              type="number"
+              name="second-operand"
+              id="second-operand"
+            />
+            <span class="form__helper">=</span>
+            <span class="form__helper">800</span>
+          </div>
+          <button type="sumbit" id="challenge-button" class="form__button">
+            Test
+          </button>
+        </form>
+      </section>
+      <section class="section" id="section-1">
+        <h3 class="section__header">
+          Search Pokémon By ID
+        </h3>
+        <form class="form">
+          <label class="form__label" for="pokemon-id">Pokémon ID</label>
+          <input
+            class="form__input form__input--large"
+            type="number"
+            name="pokemon-id"
+            id="pokemon-id"
+          />
+          <button id="form-1-button" class="form__button" type="submit">
+            find my poke
+          </button>
+        </form>
+      </section>
+      <section class="section" id="section-2">
+        <h3 class="section__header">
+          Get random Pokémon by their main type
+        </h3>
+        <form class="form">
+          <input
+            class="form__input-list"
+            list="types-selector"
+            name="types"
+            id="type"
+          />
+          <datalist id="types-selector"> </datalist>
+          <button class="form__button" id="form-2-button" type="submit">
+            Find
+          </button>
+        </form>
+      </section>
     </main>
     <footer class="footer">
-        <h4>Made with the PokeAPI</h4>
+      <h4>Made with the PokeAPI</h4>
     </footer>
-</body>
-    <script src="pureFunctions.js"></script>
-    <script src="main.js"></script>
+  </body>
+  <script src="pureFunctions.js"></script>
+  <script src="main.js"></script>
 </html>
