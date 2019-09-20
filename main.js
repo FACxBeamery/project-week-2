@@ -14,9 +14,9 @@ const fn = (() => {
 			types.forEach((type) => {
 				typeSelector.appendChild(addOption(type));
 			});
-		} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
+		} else if (typesXHR.readyState === 4 && typesXHR.status !== 200) {
 			const warning = addParagraph(
-				"Types from POKEAPI could NOT be retrieved. Status 404 not found."
+				"Types from POKEAPI could NOT be retrieved. Please try again."
 			);
 			warning.classList.add("form__warning");
 			header.appendChild(warning);
@@ -71,7 +71,7 @@ document.getElementById("form-1-button").addEventListener("click", (event) => {
 			const response = JSON.parse(pokemonXHR.response);
 			const pokemonCard = addPokemonCard(response);
 			section1.appendChild(pokemonCard);
-		} else if (pokemonXHR.readyState === 4 && pokemonXHR.status === 404) {
+		} else if (pokemonXHR.readyState === 4 && pokemonXHR.status !== 200) {
 			const warning = addParagraph(
 				"There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃"
 			);
