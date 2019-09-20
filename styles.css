@@ -4,6 +4,7 @@ body {
 	letter-spacing: 0.03rem;
 	margin: 0;
 	color: #444;
+	scroll-behavior: smooth;
 }
 
 .nav {
