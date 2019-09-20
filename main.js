@@ -11,12 +11,14 @@ var allPokemons = [];
 		const header = document.querySelector("#header");
 		typesXHR.onreadystatechange = () => {
 			if (typesXHR.readyState === 4 && typesXHR.status === 200) {
-				JSON.parse(typesXHR.response).results.map(result => types.push(result.name));
-				types.forEach(type => {
+				JSON.parse(typesXHR.response).results.map((result) => types.push(result.name));
+				types.forEach((type) => {
 					typeSelector.appendChild(addOption(type));
 				});
 			} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
-				const warning = addParagraph("Types from POKEAPI could NOT be retrieved. Status 404 not found.");
+				const warning = addParagraph(
+					"Types from POKEAPI could NOT be retrieved. Status 404 not found."
+				);
 				warning.classList.add("form__warning");
 				header.appendChild(warning);
 			}
@@ -31,11 +33,11 @@ var allPokemons = [];
 	}
 })();
 
-document.getElementById("challenge-button").addEventListener("click", event => {
+document.getElementById("challenge-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const sectionChallenge = document.getElementById("section-challenge");
 	toggleWarning(sectionChallenge);
-	toggleCard(sectionChallenge);
+	toggleCardWrapper(sectionChallenge);
 	const first = Number(document.getElementById("first-operand").value);
 	const second = Number(document.getElementById("second-operand").value);
 	if (first * second === 800) {
@@ -45,13 +47,15 @@ document.getElementById("challenge-button").addEventListener("click", event => {
 		fetchPokemonByIDToWrapper(pokemonCardWrapper, second);
 		fetchPokemonByIDToWrapper(pokemonCardWrapper, first);
 	} else {
-		const warning = addParagraph("800 = 400 * 2. Try this example first. Also, only NUMBERS are allowed");
+		const warning = addParagraph(
+			"800 = 400 * 2. Try this example first. Also, only NUMBERS are allowed"
+		);
 		warning.classList.add("form__warning");
 		sectionChallenge.appendChild(warning);
 	}
 });
 
-document.getElementById("form-1-button").addEventListener("click", event => {
+document.getElementById("form-1-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const section1 = document.getElementById("section-1");
 	const pokemonId = document.getElementById("pokemon-id").value;
@@ -66,7 +70,9 @@ document.getElementById("form-1-button").addEventListener("click", event => {
 			const pokemonCard = addPokemonCard(response);
 			section1.appendChild(pokemonCard);
 		} else if (pokemonXHR.readyState === 4 && pokemonXHR.status === 404) {
-			const warning = addParagraph("There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃");
+			const warning = addParagraph(
+				"There is no Pokémon with this ID. There are 802 Pokémon. Try a different input😃"
+			);
 			warning.classList.add("form__warning");
 			section1.appendChild(warning);
 		}
@@ -75,7 +81,7 @@ document.getElementById("form-1-button").addEventListener("click", event => {
 	pokemonXHR.send();
 });
 
-document.getElementById("form-2-button").addEventListener("click", event => {
+document.getElementById("form-2-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const section2 = document.getElementById("section-2");
 	const allTypes = [];
@@ -93,18 +99,22 @@ document.getElementById("form-2-button").addEventListener("click", event => {
 			const pokemonCard = addPokemonCard(pokemonRequested);
 			section2.appendChild(pokemonCard);
 		} else {
-			const warning = addParagraph("Pokémon not found with this type. Please choose another from the dropdown list");
+			const warning = addParagraph(
+				"Pokémon not found with this type. Please choose another from the dropdown list"
+			);
 			warning.classList.add("form__warning");
 			section2.appendChild(warning);
 		}
 	} else {
-		const warning = addParagraph("That is not a Pokémon Type. Please open the dropdown list. Example: Fire");
+		const warning = addParagraph(
+			"That is not a Pokémon Type. Please open the dropdown list. Example: Fire"
+		);
 		warning.classList.add("form__warning");
 		section2.appendChild(warning);
 	}
 });
 
-const addPokemonCard = pokemon => {
+const addPokemonCard = (pokemon) => {
 	const pokemonCard = document.createElement("DIV");
 	const pokemonTypesWrapper = document.createElement("DIV");
 	const pokemonMovesWrapper = document.createElement("DIV");
@@ -163,7 +173,7 @@ const fetchPokemonByIDToWrapper = (wrapper, id) => {
 	pokemonXHR.send();
 };
 
-const getAllPokemons = counter => {
+const getAllPokemons = (counter) => {
 	const pokemonXHR = new XMLHttpRequest();
 	const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${counter}/`;
 	pokemonXHR.onreadystatechange = () => {
@@ -181,7 +191,7 @@ const getAllPokemons = counter => {
 	pokemonXHR.send();
 };
 
-const addOption = content => {
+const addOption = (content) => {
 	const newOption = document.createElement("OPTION");
 	newOption.setAttribute("value", content);
 	const newText = document.createTextNode(content);
@@ -189,30 +199,37 @@ const addOption = content => {
 	return newOption;
 };
 
-const addParagraph = content => {
+const addParagraph = (content) => {
 	const p = document.createElement("p");
 	p.innerHTML = content;
 	return p;
 };
 
-const addImage = url => {
+const addImage = (url) => {
 	const img = document.createElement("img");
 	img.src = url;
 	return img;
 };
 
-const toggleWarning = section => {
+const toggleWarning = (section) => {
 	if (section.contains(section.querySelector(".form__warning"))) {
 		section.removeChild(section.childNodes[section.childNodes.length - 1]);
 	}
 };
 
-const toggleCard = section => {
+const toggleCard = (section) => {
 	if (section.contains(section.querySelector(".pokemon-card"))) {
 		section.removeChild(section.childNodes[section.childNodes.length - 1]);
 	}
 };
 
-const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
+const toggleCardWrapper = (section) => {
+	if (section.contains(section.querySelector(".pokemon-card-wrapper"))) {
+		section.removeChild(section.childNodes[section.childNodes.length - 1]);
+	}
+};
 
-const filterByType = (array, input) => array.filter(pokemon => pokemon.types[0].type.name == input.toLowerCase());
+const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
+
+const filterByType = (array, input) =>
+	array.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase());
