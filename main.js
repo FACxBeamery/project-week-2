@@ -11,10 +11,8 @@ var allPokemons = [];
 		const header = document.querySelector("#header");
 		typesXHR.onreadystatechange = () => {
 			if (typesXHR.readyState === 4 && typesXHR.status === 200) {
-				JSON.parse(typesXHR.response).results.map(result =>
-					types.push(result.name)
-				);
-				types.forEach(type => {
+				JSON.parse(typesXHR.response).results.map((result) => types.push(result.name));
+				types.forEach((type) => {
 					typeSelector.appendChild(addOption(type));
 				});
 			} else if (typesXHR.readyState === 4 && typesXHR.status === 404) {
@@ -35,11 +33,11 @@ var allPokemons = [];
 	}
 })();
 
-document.getElementById("challenge-button").addEventListener("click", event => {
+document.getElementById("challenge-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const sectionChallenge = document.getElementById("section-challenge");
 	toggleWarning(sectionChallenge);
-	toggleCard(sectionChallenge);
+	toggleCardWrapper(sectionChallenge);
 	const first = Number(document.getElementById("first-operand").value);
 	const second = Number(document.getElementById("second-operand").value);
 	if (first * second === 800) {
@@ -57,7 +55,7 @@ document.getElementById("challenge-button").addEventListener("click", event => {
 	}
 });
 
-document.getElementById("form-1-button").addEventListener("click", event => {
+document.getElementById("form-1-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const section1 = document.getElementById("section-1");
 	const pokemonId = document.getElementById("pokemon-id").value;
@@ -83,15 +81,11 @@ document.getElementById("form-1-button").addEventListener("click", event => {
 	pokemonXHR.send();
 });
 
-document.getElementById("form-2-button").addEventListener("click", event => {
+document.getElementById("form-2-button").addEventListener("click", (event) => {
 	event.preventDefault();
 	const section2 = document.getElementById("section-2");
 	const allTypes = [];
-	for (
-		let i = 0;
-		i < document.getElementById("types-selector").options.length;
-		i++
-	) {
+	for (let i = 0; i < document.getElementById("types-selector").options.length; i++) {
 		allTypes.push(document.getElementById("types-selector").options[i].text);
 	}
 	toggleWarning(section2);
@@ -120,14 +114,12 @@ document.getElementById("form-2-button").addEventListener("click", event => {
 	}
 });
 
-const addPokemonCard = pokemon => {
+const addPokemonCard = (pokemon) => {
 	const pokemonCard = document.createElement("DIV");
 	const pokemonTypesWrapper = document.createElement("DIV");
 	const pokemonMovesWrapper = document.createElement("DIV");
 	pokemonCard.classList.add("pokemon-card");
-	const pokemonName = addParagraph(
-		capFirstLetAndRemoveHyphen(`#${pokemon.id} ${pokemon.name}`)
-	);
+	const pokemonName = addParagraph(capFirstLetAndRemoveHyphen(`#${pokemon.id} ${pokemon.name}`));
 	pokemonName.classList.add("pokemon-card__name");
 	pokemonCard.appendChild(pokemonName);
 
@@ -143,15 +135,11 @@ const addPokemonCard = pokemon => {
 	pokemonTypesWrapper.classList.add("pokemon-card__type-wrapper");
 	pokemonCard.appendChild(pokemonTypesWrapper);
 
-	const pokemonType1 = addParagraph(
-		capFirstLetAndRemoveHyphen(pokemon.types[0].type.name)
-	);
+	const pokemonType1 = addParagraph(capFirstLetAndRemoveHyphen(pokemon.types[0].type.name));
 	pokemonType1.classList.add("pokemon-card__type");
 	pokemonTypesWrapper.appendChild(pokemonType1);
 	if (pokemon.types.length > 1) {
-		const pokemonType2 = addParagraph(
-			capFirstLetAndRemoveHyphen(pokemon.types[1].type.name)
-		);
+		const pokemonType2 = addParagraph(capFirstLetAndRemoveHyphen(pokemon.types[1].type.name));
 		pokemonTypesWrapper.appendChild(pokemonType2);
 	}
 
@@ -163,9 +151,7 @@ const addPokemonCard = pokemon => {
 	pokemonMovesWrapper.classList.add("pokemon-card__move-wrapper");
 	pokemonCard.appendChild(pokemonMovesWrapper);
 	for (let i = 0; i < 4; i++) {
-		let elem = addParagraph(
-			capFirstLetAndRemoveHyphen(pokemon.moves[i].move.name)
-		);
+		let elem = addParagraph(capFirstLetAndRemoveHyphen(pokemon.moves[i].move.name));
 		elem.classList.add("pokemon-card__move");
 		pokemonMovesWrapper.appendChild(elem);
 	}
@@ -187,7 +173,7 @@ const fetchPokemonByIDToWrapper = (wrapper, id) => {
 	pokemonXHR.send();
 };
 
-const getAllPokemons = counter => {
+const getAllPokemons = (counter) => {
 	const pokemonXHR = new XMLHttpRequest();
 	const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${counter}/`;
 	pokemonXHR.onreadystatechange = () => {
@@ -205,7 +191,7 @@ const getAllPokemons = counter => {
 	pokemonXHR.send();
 };
 
-const addOption = content => {
+const addOption = (content) => {
 	const newOption = document.createElement("OPTION");
 	newOption.setAttribute("value", content);
 	const newText = document.createTextNode(content);
@@ -213,31 +199,37 @@ const addOption = content => {
 	return newOption;
 };
 
-const addParagraph = content => {
+const addParagraph = (content) => {
 	const p = document.createElement("p");
 	p.innerHTML = content;
 	return p;
 };
 
-const addImage = url => {
+const addImage = (url) => {
 	const img = document.createElement("img");
 	img.src = url;
 	return img;
 };
 
-const toggleWarning = section => {
+const toggleWarning = (section) => {
 	if (section.contains(section.querySelector(".form__warning"))) {
 		section.removeChild(section.childNodes[section.childNodes.length - 1]);
 	}
 };
 
-const toggleCard = section => {
+const toggleCard = (section) => {
 	if (section.contains(section.querySelector(".pokemon-card"))) {
 		section.removeChild(section.childNodes[section.childNodes.length - 1]);
 	}
 };
 
-const getRandomInt = max => Math.floor(Math.random() * Math.floor(max));
+const toggleCardWrapper = (section) => {
+	if (section.contains(section.querySelector(".pokemon-card-wrapper"))) {
+		section.removeChild(section.childNodes[section.childNodes.length - 1]);
+	}
+};
+
+const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
 
 const filterByType = (array, input) =>
-	array.filter(pokemon => pokemon.types[0].type.name == input.toLowerCase());
+	array.filter((pokemon) => pokemon.types[0].type.name == input.toLowerCase());

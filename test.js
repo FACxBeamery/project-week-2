@@ -6,33 +6,21 @@ var strExistsInArray = myFunctions.strExistsInArray;
 test("Capitalises first letter and removes hyphen", t => {
 	let actual = capFirstLetAndRemoveHyphen("fire-fighter");
 	let expected = "Fire fighter";
-	t.equal(
-		actual,
-		expected,
-		"capFirstLetAndRemoveHyphen returns formatted string "
-	);
+	t.equal(actual, expected, "capFirstLetAndRemoveHyphen returns formatted string ");
 	t.end();
 });
 
 test("Capitalises first letter and does not need to remove hyphen", t => {
 	let actual = capFirstLetAndRemoveHyphen("Firefast");
 	let expected = "Firefast";
-	t.equal(
-		actual,
-		expected,
-		"capFirstLetAndRemoveHyphen returns formatted string "
-	);
+	t.equal(actual, expected, "capFirstLetAndRemoveHyphen returns formatted string ");
 	t.end();
 });
 
 test("Removes hyphen and capitalises first letter", t => {
 	let actual = capFirstLetAndRemoveHyphen("-hello");
 	let expected = "Hello";
-	t.equal(
-		actual,
-		expected,
-		"capFirstLetAndRemoveHyphen returns formatted string "
-	);
+	t.equal(actual, expected, "capFirstLetAndRemoveHyphen returns formatted string ");
 	t.end();
 });
 
@@ -42,11 +30,7 @@ test("String Exists in array - case sensitive", t => {
 		true,
 		"strExistsInArray returns true"
 	);
-	t.equal(
-		strExistsInArray("2", ["water", "2", "ground"]),
-		true,
-		"strExistsInArray returns true"
-	);
+	t.equal(strExistsInArray("2", ["water", "2", "ground"]), true, "strExistsInArray returns true");
 	t.equal(
 		strExistsInArray("aoisndionqsnd", ["water", "fire", "aoisndionqsnd"]),
 		true,
@@ -66,11 +50,7 @@ test("String does NOT exist in array", t => {
 		false,
 		"strExistsInArray returns false"
 	);
-	t.equal(
-		strExistsInArray("2", ["water", 2, "ground"]),
-		false,
-		"strExistsInArray returns false"
-	);
+	t.equal(strExistsInArray("2", ["water", 2, "ground"]), false, "strExistsInArray returns false");
 	t.equal(
 		strExistsInArray("aoisndionqsnd", ["water", "fire", "aoisndionqsnD"]),
 		false,
