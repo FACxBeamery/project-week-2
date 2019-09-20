@@ -153,7 +153,7 @@ const addPokemonCard = (pokemon) => {
 	pokemonMovesWrapper.classList.add("pokemon-card__move-wrapper");
 	pokemonCard.appendChild(pokemonMovesWrapper);
 	for (let i = 0; i < 4; i++) {
-		let elem = addParagraph(capFirstLetAndRemoveHyphen(pokemon.moves[i].move.name));
+		let elem = addParagraph(capFirstLetAndRemoveHyphen(`${pokemon.moves[i].move.name}.`));
 		elem.classList.add("pokemon-card__move");
 		pokemonMovesWrapper.appendChild(elem);
 	}
