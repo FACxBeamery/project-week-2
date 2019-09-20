@@ -7,7 +7,7 @@ Presentation:
 URL: https://facxbeamery.github.io/project-week-2/
 
 ## Motivation
-The purpose of this project was to utilise the PokeAPI to retrieve main information about Pokémon. 
+The purpose of this project was to utilise the [PokeAPI](https://pokeapi.co/docs/v2.html/#info) to retrieve main information about Pokémon. 
 
 ## User Journey
 
@@ -17,12 +17,20 @@ As a user I want to find out more about Pokémon, their types, and also the firs
 
 ## Search By ID
 
+User input triggers the API call to the [PokeAPI](https://pokeapi.co/docs/v2.html/#info) and sends back the information of the pokemon with the ID = their input.
+
 <img src="https://i.ibb.co/8xqjm2R/Screenshot-2019-09-19-at-16-06-01.png" alt="Screenshot-2019-09-19-at-16-06-01" border="0">
 
 ## Get random Pokémon by type 
+
+On load, the website does GET requests to the API that ensure that 200 Pokemon get stored in the global variable allPokemons. 
+The API did NOT provide with an endpoint that would return all pokemons of X type. So 200 pokemons' data are accessible from the array and then filtered by type to return a random one. 
+
 <img src="https://i.ibb.co/hVcH4qx/Screenshot-2019-09-19-at-16-06-15.png" alt="Screenshot-2019-09-19-at-16-06-15" border="0">
 
 ## 'Fun' daily challenge
+
+Making sure that the multiplication's operands is equal to 800 -> returns 2 pokemons' info with the IDs equal to each of the operands.
 
 <img src="https://i.ibb.co/bJHc8D3/Screenshot-2019-09-19-at-16-05-45.png" alt="Screenshot-2019-09-19-at-16-05-45" border="0">
 
@@ -30,52 +38,41 @@ As a user I want to find out more about Pokémon, their types, and also the firs
 # User Stories
 
 ## APIs
-* **input submission triggers one or more API calls using xhr**
-    As a developer I want our form submissions to trigger one or more API calls so that I can demonstrate the use of a fetch request.
-    - [x] code includes at least one fetch request
-    - [x] form submission triggers a fetch request
-    - [x] event listener in javascript listens for form submission
 
-* **result is displayed on the page**
-    As a user I want to input data so I can interact with the page
-    - [x] when I submit my input, I can see something displayed on the page
-    - [x] the result displayed on the page must change depending on my input
+* As a developer I want our form submissions to trigger one or more API calls so that I can demonstrate the use of a xhr request 
 
+* As a user I want to input data so I can interact with the page
 
-* **if the API call fails, I can see an error message on the page**
-    As a user I want to be notified of an error so I understand why something might not be working as I expected.
-    - [x] I can see why there was an error
-    - [x] I can see a plain english description of what happened
-    - [x] I know what to do to correct the error
+* As a user I want to be notified of an error so I understand why something might not be working as I expected.
 
-* **if my input is not valid, I can see an error message on the page**
-    As a user I want to know that I'm providing the correct information in the correct way so that I can complete the form successfully
-    - [x] If my input is in the correct format, I can see positive feedback
-    - [x] I can see an example of correct input in the placeholder text
-    - [x] If my input is not valid, I can see a plain english description of how to correct it
+* As a user I want to know that I'm providing the correct information in the correct way so that I can complete the form successfully
 
+XMLHttpRequests used to get data from the [PokeAPI](https://pokeapi.co/docs/v2.html/#info); The API calls are triggered by user input; the user sees a warning if the API call returns a 'bad error'. the user ALSO sees an error if their input was on the wrong format. 
 
 ## Code Quality
-As a developer...
-* I need my code to be legible and understandable **so that** any developer who looks at the code now or in the future can understand what it does
-  - [x] code is self documenting
-  - [x] code is in our agreed style
-  - [x] camelCase is used in Javascript
-  - [x] CSS uses kebab-case or BEM
-  - [x] there are no linter errors
-  - [x] no extraneous code (e.g. console.logs)
+* As a developer I need my code to be legible and understandable **so that** any developer who looks at the code now or in the future can understand what it does
+
+Naming conventions are followed; BEM is used; ES6 Syntax; Code's clean and organised
 
 ## Testing
 
-As a developer, I need to have unit tests in place for my logic functions, so that I can be sure they work correctly
-- [x] each logic function has a related test
-- [x] all tests are passing
+* As a developer, I need to have unit tests in place for my logic functions, so that I can be sure they work correctly
 
-As a developer, I need to use pure functions for my logic, so that I do not mutate any state in my application
-- [x] logic functions are pure
-- [x] state is not mutated
+* As a developer, I need to use pure functions for my logic, so that I do not mutate any state in my application
+
+Tape used for unit testing. nyc for test coverage
 
 ## Deployment
 
-As a developer, I need to run my web app from a local HTTP server, so that I can make changes and understand how they will affect my app
-- [x] My app runs from a Docker container
+* As a developer, I need to run my web app from a local HTTP server, so that I can make changes and understand how they will affect my app
+
+
+# How to run it locally
+
+- clone the repo
+- run the following: 
+  `npm install `
+
+# Existing Bugs
+
+Nav links aren't 'tabbable' on Firefox. Still trying to figure how to fix it.
